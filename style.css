@@ -42,8 +42,10 @@ img{max-width:100%;display:block}
 .site-header.scrolled{border-color:var(--line)}
 .nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:30px}
 .brand{display:flex;align-items:center;gap:10px;font-size:.94rem;font-weight:900;letter-spacing:.04em}
-.brand img{width:44px;height:44px;object-fit:contain;
-    flex-shrink: 0;
+.brand img{
+  width:48px;
+  height:48px;
+  object-fit:contain
 }
 .brand b,.footer-brand b{color:var(--gold2)}
 .nav-links{display:flex;align-items:center;gap:28px}
@@ -54,7 +56,12 @@ img{max-width:100%;display:block}
 .menu-toggle span{display:block;width:23px;height:2px;background:#eee;margin:5px auto}
 
 .hero{position:relative;min-height:100svh;display:flex;align-items:center;padding:145px 0 90px;overflow:hidden}
-.hero-grid{display:grid;grid-template-columns:1.04fr .96fr;gap:60px;align-items:center}
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.04fr) minmax(0, .96fr);
+  gap: 60px;
+  align-items: center;
+}
 .kicker,.eyebrow{font-size:.72rem;font-weight:800;letter-spacing:.16em;color:var(--gold2)}
 .kicker{display:flex;align-items:center;gap:10px;margin-bottom:23px}
 .kicker span{width:7px;height:7px;border-radius:50%;background:var(--gold2);box-shadow:0 0 15px rgba(242,196,92,.7)}
@@ -175,7 +182,11 @@ textarea{resize:vertical;min-height:130px}
   .nav-links.open{transform:none;opacity:1;pointer-events:auto}
   .nav-links a{padding:12px}
   .nav-cta{text-align:center}
-  .hero-grid,.split,.contact-box{grid-template-columns:1fr}
+  .hero-grid,
+.split,
+.contact-box {
+  grid-template-columns: minmax(0, 1fr);
+}
   .hero{padding-top:125px}
   .hero-art{min-height:430px}
   .service-grid{grid-template-columns:repeat(2,1fr)}
@@ -199,4 +210,26 @@ textarea{resize:vertical;min-height:130px}
   .contact-box{padding:32px 22px;gap:40px}
   .form-row{grid-template-columns:1fr}
   .footer-inner{align-items:flex-start;flex-direction:column}
+}
+@media (max-width: 900px) {
+  .hero-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-copy {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .hero-art {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .hero h1 {
+    max-width: 100%;
+    overflow-wrap: break-word;
+  }
 }
