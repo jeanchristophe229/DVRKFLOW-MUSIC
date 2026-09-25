@@ -1,34 +1,37 @@
 /* =========================================================
    DVRKFLOW MUSIC
-   Modern Light UI — Eco-conscious / Responsive
+   STYLE.CSS — VERSION CORRIGÉE
+   ========================================================= */
+
+
+/* =========================================================
+   VARIABLES
    ========================================================= */
 
 :root {
-  --bg: #ffffff;
-  --bg-soft: #f7f5ef;
-  --bg-soft-2: #fbfaf7;
+  --bg: #f8f6f1;
+  --bg-soft: #f2eee6;
+  --bg-dark: #11100e;
 
-  --black: #11110f;
-  --black-2: #25231f;
+  --gold: #d9a52a;
+  --gold-light: #f2c45c;
+  --gold-dark: #b98512;
 
-  --gold: #d49a16;
-  --gold-dark: #b77e08;
-  --gold-light: #f1c85a;
-
-  --text: #171613;
-  --muted: #706e68;
-  --muted-light: #99958c;
-
-  --line: #e8e5de;
-  --line-dark: #d9d5cc;
-
+  --black: #11100e;
   --white: #ffffff;
 
-  --shadow-sm: 0 8px 25px rgba(20, 18, 13, 0.055);
-  --shadow-md: 0 20px 55px rgba(20, 18, 13, 0.08);
+  --text: #1c1a17;
+  --muted: #68635b;
+  --muted-light: #8b857b;
+
+  --line: rgba(17, 16, 14, 0.10);
+  --line-gold: rgba(217, 165, 42, 0.30);
 
   --max: 1180px;
-  --radius: 22px;
+  --radius: 24px;
+
+  --shadow:
+    0 20px 60px rgba(0, 0, 0, 0.08);
 }
 
 
@@ -47,7 +50,21 @@ html {
 }
 
 body {
-  background: var(--bg);
+  min-width: 320px;
+
+  background:
+    radial-gradient(
+      1000px circle at 85% 0%,
+      rgba(217,165,42,.12),
+      transparent 45%
+    ),
+    radial-gradient(
+      700px circle at 0% 20%,
+      rgba(217,165,42,.08),
+      transparent 40%
+    ),
+    #f8f6f1;
+
   color: var(--text);
 
   font-family:
@@ -60,6 +77,7 @@ body {
     sans-serif;
 
   line-height: 1.55;
+
   overflow-x: hidden;
 
   -webkit-font-smoothing: antialiased;
@@ -67,35 +85,13 @@ body {
 }
 
 
-/* =========================================================
-   LIGHT BACKGROUND
-   ========================================================= */
+/*
+   IMPORTANT :
+   Aucun body::before / body:before ici.
+   Cela évite le problème du CSS mal interprété
+   présent dans l'ancienne version.
+*/
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-
-  pointer-events: none;
-  z-index: -1;
-
-  background:
-    radial-gradient(
-      circle at 85% 5%,
-      rgba(212, 154, 22, 0.075),
-      transparent 26%
-    ),
-    radial-gradient(
-      circle at 0% 45%,
-      rgba(212, 154, 22, 0.035),
-      transparent 24%
-    );
-}
-
-
-/* =========================================================
-   BASE ELEMENTS
-   ========================================================= */
 
 a {
   color: inherit;
@@ -122,18 +118,25 @@ img {
   margin-inline: auto;
 }
 
+
+/* =========================================================
+   ACCESSIBILITÉ
+   ========================================================= */
+
 .skip-link {
   position: fixed;
+
   left: 15px;
   top: -100px;
 
-  background: var(--black);
-  color: var(--white);
+  z-index: 9999;
 
   padding: 10px 15px;
+
   border-radius: 10px;
 
-  z-index: 9999;
+  background: var(--gold-light);
+  color: var(--black);
 }
 
 .skip-link:focus {
@@ -152,33 +155,43 @@ img {
 
 .site-header {
   position: fixed;
+
   top: 0;
   left: 0;
   right: 0;
 
   z-index: 1000;
 
-  background: rgba(255, 255, 255, 0.92);
+  background:
+    rgba(248, 246, 241, 0.88);
 
-  border-bottom: 1px solid transparent;
+  border-bottom:
+    1px solid transparent;
 
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 
   transition:
+    background 0.25s ease,
     border-color 0.25s ease,
     box-shadow 0.25s ease;
 }
 
 .site-header.scrolled {
+  background:
+    rgba(248, 246, 241, 0.96);
+
   border-color: var(--line);
-  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.035);
+
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.05);
 }
 
 .nav {
-  min-height: 78px;
+  min-height: 76px;
 
   display: flex;
+
   align-items: center;
   justify-content: space-between;
 
@@ -187,32 +200,34 @@ img {
 
 
 /* =========================================================
-   BRAND / LOGO
+   LOGO
    ========================================================= */
 
 .brand {
   display: flex;
+
   align-items: center;
 
-  gap: 12px;
+  gap: 11px;
 
-  font-size: 0.95rem;
+  flex-shrink: 0;
+
+  font-size: 0.94rem;
+
   font-weight: 900;
 
-  letter-spacing: 0.035em;
-
-  min-width: 0;
+  letter-spacing: 0.04em;
 }
 
 .brand img {
-  width: 58px;
-  height: 58px;
+  display: block;
+
+  width: 52px;
+  height: 52px;
 
   object-fit: contain;
 
   flex-shrink: 0;
-
-  border-radius: 10px;
 }
 
 .brand span {
@@ -230,19 +245,23 @@ img {
 
 .nav-links {
   display: flex;
+
   align-items: center;
+
   gap: 28px;
+
+  margin-left: auto;
 }
 
 .nav-links a {
-  color: #55524b;
+  color: #514d46;
 
-  font-size: 0.84rem;
+  font-size: 0.86rem;
+
   font-weight: 650;
 
   transition:
-    color 0.2s ease,
-    transform 0.2s ease;
+    color 0.2s ease;
 }
 
 .nav-links a:hover {
@@ -250,31 +269,27 @@ img {
 }
 
 .nav-cta {
-  padding: 11px 18px;
+  padding: 10px 17px;
 
-  border: 1px solid var(--black);
+  border:
+    1px solid var(--line-gold);
 
   border-radius: 999px;
 
-  color: var(--white) !important;
+  background:
+    rgba(217,165,42,0.08);
 
-  background: var(--black);
-
-  transition:
-    background 0.2s ease,
-    transform 0.2s ease;
+  color: var(--black) !important;
 }
 
 .nav-cta:hover {
-  background: var(--gold-dark);
-  border-color: var(--gold-dark);
-
-  transform: translateY(-1px);
+  background:
+    rgba(217,165,42,0.15);
 }
 
 
 /* =========================================================
-   MOBILE MENU BUTTON
+   MENU MOBILE
    ========================================================= */
 
 .menu-toggle {
@@ -283,10 +298,11 @@ img {
   width: 44px;
   height: 44px;
 
-  border: 0;
-  background: transparent;
+  margin-left: auto;
 
-  padding: 0;
+  border: 0;
+
+  background: transparent;
 }
 
 .menu-toggle span {
@@ -297,9 +313,9 @@ img {
 
   margin: 5px auto;
 
-  background: var(--black);
+  border-radius: 4px;
 
-  border-radius: 5px;
+  background: var(--black);
 }
 
 
@@ -313,25 +329,22 @@ img {
   min-height: 100svh;
 
   display: flex;
+
   align-items: center;
 
-  padding: 145px 0 90px;
+  padding:
+    145px
+    0
+    90px;
 
   overflow: hidden;
-
-  background:
-    linear-gradient(
-      180deg,
-      #ffffff 0%,
-      #ffffff 65%,
-      #fbfaf7 100%
-    );
 }
 
-
-/* IMPORTANT :
-   minmax(0, ...) prevents horizontal overflow */
 .hero-grid {
+  position: relative;
+
+  z-index: 2;
+
   width: 100%;
 
   display: grid;
@@ -345,6 +358,14 @@ img {
   align-items: center;
 }
 
+.hero-copy {
+  position: relative;
+
+  z-index: 3;
+
+  min-width: 0;
+}
+
 
 /* =========================================================
    HERO TEXT
@@ -352,17 +373,18 @@ img {
 
 .kicker,
 .eyebrow {
-  font-size: 0.7rem;
+  color: var(--gold-dark);
+
+  font-size: 0.72rem;
 
   font-weight: 850;
 
   letter-spacing: 0.16em;
-
-  color: var(--gold-dark);
 }
 
 .kicker {
   display: flex;
+
   align-items: center;
 
   gap: 10px;
@@ -379,31 +401,36 @@ img {
   border-radius: 50%;
 
   background: var(--gold);
-
-  box-shadow:
-    0 0 0 4px rgba(212, 154, 22, 0.09);
 }
 
 .hero h1 {
+  position: relative;
+
+  z-index: 4;
+
   max-width: 780px;
-
-  font-size: clamp(3.3rem, 7vw, 6.6rem);
-
-  line-height: 0.9;
-
-  letter-spacing: -0.058em;
-
-  font-weight: 900;
 
   color: var(--black);
 
-  overflow-wrap: break-word;
+  font-size:
+    clamp(3.3rem, 7vw, 6.7rem);
+
+  line-height: 0.89;
+
+  letter-spacing: -0.055em;
+
+  font-weight: 900;
+
+  overflow-wrap: normal;
+
+  word-break: normal;
 }
 
 .hero h1 em,
 h2 em {
-  font-style: normal;
   color: var(--gold-dark);
+
+  font-style: normal;
 }
 
 .hero-lead {
@@ -413,7 +440,7 @@ h2 em {
 
   color: var(--muted);
 
-  font-size: 1.02rem;
+  font-size: 1.04rem;
 
   line-height: 1.75;
 }
@@ -421,9 +448,9 @@ h2 em {
 .hero-actions {
   display: flex;
 
-  gap: 12px;
-
   flex-wrap: wrap;
+
+  gap: 12px;
 
   margin-top: 32px;
 }
@@ -434,6 +461,8 @@ h2 em {
    ========================================================= */
 
 .button {
+  min-height: 51px;
+
   display: inline-flex;
 
   align-items: center;
@@ -441,17 +470,17 @@ h2 em {
 
   gap: 10px;
 
-  min-height: 52px;
+  padding:
+    0 21px;
 
-  padding: 0 22px;
+  border:
+    1px solid transparent;
 
   border-radius: 999px;
 
-  border: 1px solid transparent;
+  font-size: 0.86rem;
 
   font-weight: 850;
-
-  font-size: 0.86rem;
 
   transition:
     transform 0.2s ease,
@@ -465,47 +494,52 @@ h2 em {
 }
 
 .button-gold {
+  color: #17110a;
+
   background:
     linear-gradient(
       135deg,
-      #f3c85b,
-      #dda620
+      var(--gold-light),
+      var(--gold)
     );
 
-  color: #17130a;
-
   box-shadow:
-    0 10px 25px rgba(212, 154, 22, 0.18);
+    0 10px 30px
+    rgba(217,165,42,0.12);
 }
 
 .button-gold:hover {
   box-shadow:
-    0 14px 30px rgba(212, 154, 22, 0.25);
+    0 14px 35px
+    rgba(217,165,42,0.18);
 }
 
 .button-ghost {
-  border-color: var(--line-dark);
-
   color: var(--black);
 
-  background: #ffffff;
+  background: transparent;
+
+  border-color:
+    rgba(17,16,14,0.16);
 }
 
 .button-ghost:hover {
-  border-color: var(--black);
+  border-color:
+    var(--line-gold);
 
-  background: var(--bg-soft);
+  background:
+    rgba(217,165,42,0.06);
 }
 
 
 /* =========================================================
-   HERO MICRO PROOF
+   MICRO PROOF
    ========================================================= */
 
 .micro-proof {
   margin-top: 30px;
 
-  color: #858178;
+  color: var(--muted-light);
 
   font-size: 0.7rem;
 
@@ -513,11 +547,11 @@ h2 em {
 }
 
 .micro-proof span {
+  margin: 0 5px;
+
   color: var(--gold-dark);
 
-  font-weight: 900;
-
-  margin: 0 5px;
+  font-weight: 850;
 }
 
 
@@ -530,12 +564,13 @@ h2 em {
 
   width: 100%;
 
+  min-width: 0;
+
   min-height: 520px;
 
   display: grid;
-  place-items: center;
 
-  min-width: 0;
+  place-items: center;
 }
 
 .art-frame {
@@ -545,16 +580,18 @@ h2 em {
 
   aspect-ratio: 1;
 
-  border-radius: 30px;
-
   overflow: hidden;
 
-  background: var(--black);
+  border:
+    1px solid var(--line-gold);
 
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 30px;
+
+  background: #11100e;
 
   box-shadow:
-    0 30px 80px rgba(0, 0, 0, 0.12);
+    0 25px 70px
+    rgba(0,0,0,0.13);
 }
 
 .art-frame::after {
@@ -564,7 +601,9 @@ h2 em {
 
   inset: 0;
 
-  border: 1px solid rgba(255, 255, 255, 0.09);
+  border:
+    1px solid
+    rgba(255,255,255,0.08);
 
   border-radius: inherit;
 
@@ -576,45 +615,6 @@ h2 em {
   height: 100%;
 
   object-fit: cover;
-
-  transform: scale(1.015);
-}
-
-.art-shine {
-  position: absolute;
-
-  inset: -40%;
-
-  z-index: 1;
-
-  background:
-    linear-gradient(
-      115deg,
-      transparent 42%,
-      rgba(255, 255, 255, 0.12) 50%,
-      transparent 58%
-    );
-
-  transform: rotate(-10deg);
-
-  animation: shine 8s ease-in-out infinite;
-}
-
-@keyframes shine {
-
-  0%,
-  55% {
-    transform:
-      translateX(-30%)
-      rotate(-10deg);
-  }
-
-  75%,
-  100% {
-    transform:
-      translateX(30%)
-      rotate(-10deg);
-  }
 }
 
 
@@ -625,28 +625,32 @@ h2 em {
 .floating-card {
   position: absolute;
 
-  z-index: 3;
+  z-index: 5;
 
-  padding: 13px 15px;
+  padding:
+    13px
+    15px;
 
-  border: 1px solid var(--line);
+  border:
+    1px solid
+    rgba(17,16,14,0.10);
 
   border-radius: 14px;
 
-  background: rgba(255, 255, 255, 0.94);
+  background:
+    rgba(248,246,241,0.94);
 
   box-shadow:
-    0 15px 40px rgba(0, 0, 0, 0.08);
-
-  backdrop-filter: blur(8px);
+    0 15px 40px
+    rgba(0,0,0,0.10);
 }
 
 .floating-card strong {
   display: block;
 
-  font-size: 0.7rem;
-
   color: var(--gold-dark);
+
+  font-size: 0.7rem;
 
   letter-spacing: 0.1em;
 }
@@ -659,47 +663,31 @@ h2 em {
 
 .fc-one {
   right: -5px;
+
   top: 16%;
 }
 
 .fc-two {
   left: -8px;
+
   bottom: 15%;
 }
 
 
 /* =========================================================
-   HERO DECORATION
+   HERO GLOW
    ========================================================= */
 
-.hero-glow {
-  position: absolute;
+/*
+   Le background du BODY possède déjà les halos dorés.
+   On désactive les anciens gros halos du Hero afin
+   d'éviter une page trop lumineuse.
+*/
 
-  border-radius: 50%;
-
-  filter: blur(80px);
-
-  pointer-events: none;
-}
-
-.glow-a {
-  width: 350px;
-  height: 350px;
-
-  background: rgba(212, 154, 22, 0.07);
-
-  right: -180px;
-  top: 8%;
-}
-
+.hero-glow,
+.glow-a,
 .glow-b {
-  width: 260px;
-  height: 260px;
-
-  background: rgba(212, 154, 22, 0.045);
-
-  left: -150px;
-  bottom: 0;
+  display: none;
 }
 
 
@@ -708,31 +696,36 @@ h2 em {
    ========================================================= */
 
 .platform-strip {
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-
   padding: 23px 0;
 
-  background: #ffffff;
+  border-top:
+    1px solid var(--line);
+
+  border-bottom:
+    1px solid var(--line);
+
+  background:
+    rgba(242,238,230,0.72);
 }
 
 .platform-inner {
   display: flex;
 
   align-items: center;
+
   justify-content: space-between;
 
   gap: 25px;
 }
 
 .platform-label {
-  color: #858178;
+  color: var(--muted-light);
 
   font-size: 0.67rem;
 
-  letter-spacing: 0.15em;
-
   font-weight: 850;
+
+  letter-spacing: 0.15em;
 
   white-space: nowrap;
 }
@@ -740,25 +733,28 @@ h2 em {
 .platforms {
   display: flex;
 
-  gap: 8px;
-
   flex-wrap: wrap;
 
   justify-content: flex-end;
+
+  gap: 8px;
 }
 
 .platforms span {
-  border: 1px solid var(--line);
+  padding:
+    7px 11px;
 
-  padding: 7px 11px;
+  border:
+    1px solid var(--line);
 
   border-radius: 999px;
 
-  color: #69655d;
-
-  background: var(--bg-soft-2);
+  color: var(--muted);
 
   font-size: 0.67rem;
+
+  background:
+    rgba(255,255,255,0.35);
 }
 
 
@@ -767,24 +763,30 @@ h2 em {
    ========================================================= */
 
 .section {
-  padding: 115px 0;
+  padding:
+    110px 0;
 
-  background: #ffffff;
+  background:
+    #f8f6f1;
 }
 
 .dark-section {
-  background: var(--bg-soft);
+  background:
+    #f2eee6;
 
-  border-top: 1px solid var(--line);
+  border-top:
+    1px solid var(--line);
 
-  border-bottom: 1px solid var(--line);
+  border-bottom:
+    1px solid var(--line);
 }
 
 .section-heading {
   display: flex;
 
-  justify-content: space-between;
   align-items: end;
+
+  justify-content: space-between;
 
   gap: 40px;
 
@@ -792,15 +794,20 @@ h2 em {
 }
 
 .section-heading h2 {
-  font-size: clamp(2.5rem, 5.4vw, 5rem);
+  margin-top: 12px;
+
+  color: var(--black);
+
+  font-size:
+    clamp(
+      2.5rem,
+      5.4vw,
+      5rem
+    );
 
   line-height: 0.92;
 
   letter-spacing: -0.055em;
-
-  margin-top: 12px;
-
-  color: var(--black);
 }
 
 .section-heading > p {
@@ -808,9 +815,7 @@ h2 em {
 
   color: var(--muted);
 
-  font-size: 0.92rem;
-
-  line-height: 1.7;
+  font-size: 0.9rem;
 }
 
 
@@ -828,46 +833,54 @@ h2 em {
 }
 
 .service-card {
+  position: relative;
+
   min-height: 285px;
 
-  border: 1px solid var(--line);
-
-  border-radius: var(--radius);
-
-  background: #ffffff;
-
-  padding: 27px;
-
   display: flex;
-  flex-direction: column;
 
-  position: relative;
+  flex-direction: column;
 
   overflow: hidden;
 
-  box-shadow: var(--shadow-sm);
+  padding: 27px;
+
+  border:
+    1px solid var(--line);
+
+  border-radius:
+    var(--radius);
+
+  background:
+    rgba(255,255,255,0.46);
+
+  box-shadow:
+    0 10px 35px
+    rgba(0,0,0,0.035);
 
   transition:
     transform 0.25s ease,
     border-color 0.25s ease,
-    box-shadow 0.25s ease;
+    background 0.25s ease;
 }
 
 .service-card:hover {
   transform: translateY(-4px);
 
-  border-color: rgba(212, 154, 22, 0.35);
+  border-color:
+    var(--line-gold);
 
-  box-shadow: var(--shadow-md);
+  background:
+    rgba(255,255,255,0.72);
 }
 
 .service-no {
   position: absolute;
 
-  right: 20px;
   top: 20px;
+  right: 20px;
 
-  color: #aaa59b;
+  color: #a19b91;
 
   font-size: 0.68rem;
 
@@ -878,60 +891,46 @@ h2 em {
   width: 42px;
   height: 42px;
 
-  border-radius: 13px;
-
-  border: 1px solid rgba(212, 154, 22, 0.3);
-
   display: grid;
+
   place-items: center;
+
+  border:
+    1px solid var(--line-gold);
+
+  border-radius: 13px;
 
   color: var(--gold-dark);
 
-  font-size: 1.1rem;
-
-  background: rgba(212, 154, 22, 0.055);
+  background:
+    rgba(217,165,42,0.06);
 }
 
 .service-card h3 {
-  font-size: 1.25rem;
-
   margin-top: auto;
 
   margin-bottom: 8px;
 
   color: var(--black);
+
+  font-size: 1.25rem;
 }
 
 .service-card p {
+  max-width: 300px;
+
   color: var(--muted);
 
   font-size: 0.82rem;
-
-  max-width: 300px;
-
-  line-height: 1.65;
 }
 
 .service-feature {
   background:
     linear-gradient(
       145deg,
-      #fffaf0,
-      #ffffff
+      rgba(217,165,42,0.11),
+      rgba(255,255,255,0.50)
     );
-}
-
-.feature-line {
-  height: 1px;
-
-  background:
-    linear-gradient(
-      90deg,
-      var(--gold),
-      transparent
-    );
-
-  margin-top: 25px;
 }
 
 .service-feature h3 {
@@ -940,14 +939,27 @@ h2 em {
   line-height: 1.05;
 }
 
+.feature-line {
+  height: 1px;
+
+  margin-top: 25px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--gold),
+      transparent
+    );
+}
+
 .text-link {
+  margin-top: 18px;
+
   color: var(--gold-dark);
 
   font-size: 0.78rem;
 
   font-weight: 850;
-
-  margin-top: 18px;
 }
 
 
@@ -965,9 +977,11 @@ h2 em {
 }
 
 .step {
-  border-top: 1px solid var(--line-dark);
+  padding:
+    20px 8px 0;
 
-  padding: 20px 8px 0;
+  border-top:
+    1px solid var(--line);
 }
 
 .step > b {
@@ -979,11 +993,12 @@ h2 em {
 }
 
 .step h3 {
+  margin:
+    22px 0 7px;
+
   color: var(--black);
 
   font-size: 1.25rem;
-
-  margin: 22px 0 7px;
 }
 
 .step p {
@@ -1008,27 +1023,37 @@ h2 em {
 }
 
 .split h2 {
-  font-size: clamp(2.5rem, 5vw, 4.7rem);
+  margin-top: 12px;
+
+  color: var(--black);
+
+  font-size:
+    clamp(
+      2.5rem,
+      5vw,
+      4.7rem
+    );
 
   line-height: 0.93;
 
   letter-spacing: -0.055em;
-
-  margin-top: 12px;
-
-  color: var(--black);
 }
 
 .manifesto-big {
-  font-size: clamp(1.6rem, 3vw, 2.8rem);
+  max-width: 700px;
+
+  color: var(--black);
+
+  font-size:
+    clamp(
+      1.6rem,
+      3vw,
+      2.8rem
+    );
 
   line-height: 1.05;
 
   letter-spacing: -0.035em;
-
-  max-width: 700px;
-
-  color: var(--black);
 }
 
 .manifesto-points {
@@ -1043,31 +1068,32 @@ h2 em {
 }
 
 .manifesto-points > div {
-  border-top: 1px solid var(--line);
-
   padding-top: 16px;
+
+  border-top:
+    1px solid var(--line);
 }
 
 .manifesto-points span {
+  margin-right: 10px;
+
   color: var(--gold-dark);
 
   font-size: 0.7rem;
-
-  margin-right: 10px;
 }
 
 .manifesto-points strong {
-  font-size: 0.88rem;
-
   color: var(--black);
+
+  font-size: 0.88rem;
 }
 
 .manifesto-points p {
+  margin-top: 9px;
+
   color: var(--muted);
 
   font-size: 0.78rem;
-
-  margin-top: 9px;
 }
 
 
@@ -1076,13 +1102,17 @@ h2 em {
    ========================================================= */
 
 .metrics {
-  padding: 55px 0;
+  padding:
+    55px 0;
 
-  border-top: 1px solid var(--line);
+  border-top:
+    1px solid var(--line);
 
-  border-bottom: 1px solid var(--line);
+  border-bottom:
+    1px solid var(--line);
 
-  background: var(--bg-soft);
+  background:
+    #11100e;
 }
 
 .metric-grid {
@@ -1095,25 +1125,32 @@ h2 em {
 .metric {
   text-align: center;
 
-  border-right: 1px solid var(--line-dark);
+  border-right:
+    1px solid
+    rgba(255,255,255,0.10);
 }
 
 .metric:last-child {
-  border: 0;
+  border-right: 0;
 }
 
 .metric strong {
   display: block;
 
-  font-size: clamp(2.7rem, 5vw, 4.5rem);
+  color: var(--white);
+
+  font-size:
+    clamp(
+      2.7rem,
+      5vw,
+      4.5rem
+    );
 
   letter-spacing: -0.06em;
-
-  color: var(--black);
 }
 
 .metric span {
-  color: #77736b;
+  color: #aaa49a;
 
   font-size: 0.7rem;
 
@@ -1134,27 +1171,31 @@ h2 em {
 }
 
 details {
-  border-bottom: 1px solid var(--line);
+  border-bottom:
+    1px solid var(--line);
 }
 
 summary {
-  list-style: none;
-
-  cursor: pointer;
-
-  padding: 24px 0;
-
-  font-weight: 800;
-
-  font-size: 1rem;
-
   display: flex;
+
+  align-items: center;
 
   justify-content: space-between;
 
   gap: 20px;
 
+  padding:
+    24px 0;
+
   color: var(--black);
+
+  font-size: 1rem;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  list-style: none;
 }
 
 summary::-webkit-details-marker {
@@ -1168,7 +1209,8 @@ summary span {
 
   font-weight: 400;
 
-  transition: transform 0.2s ease;
+  transition:
+    transform 0.2s ease;
 }
 
 details[open] summary span {
@@ -1176,13 +1218,14 @@ details[open] summary span {
 }
 
 details p {
+  max-width: 780px;
+
+  padding:
+    0 40px 25px 0;
+
   color: var(--muted);
 
   font-size: 0.88rem;
-
-  max-width: 780px;
-
-  padding: 0 40px 25px 0;
 }
 
 
@@ -1193,16 +1236,11 @@ details p {
 .contact-section {
   padding-top: 70px;
 
-  background: var(--bg-soft);
+  background:
+    #f2eee6;
 }
 
 .contact-box {
-  border: 1px solid rgba(212, 154, 22, 0.28);
-
-  border-radius: 30px;
-
-  padding: 55px;
-
   display: grid;
 
   grid-template-columns:
@@ -1211,45 +1249,55 @@ details p {
 
   gap: 60px;
 
+  padding: 55px;
+
+  border:
+    1px solid var(--line-gold);
+
+  border-radius: 30px;
+
   background:
     radial-gradient(
       circle at 0 0,
-      rgba(212, 154, 22, 0.09),
-      transparent 42%
+      rgba(217,165,42,0.10),
+      transparent 43%
     ),
-    #ffffff;
-
-  box-shadow: var(--shadow-sm);
+    rgba(255,255,255,0.46);
 }
 
 .contact-copy h2 {
-  font-size: clamp(2.5rem, 5vw, 4.6rem);
+  margin-top: 12px;
+
+  color: var(--black);
+
+  font-size:
+    clamp(
+      2.5rem,
+      5vw,
+      4.6rem
+    );
 
   line-height: 0.92;
 
   letter-spacing: -0.055em;
-
-  margin-top: 12px;
-
-  color: var(--black);
 }
 
 .contact-copy > p:not(.eyebrow) {
-  color: var(--muted);
-
   max-width: 430px;
 
   margin-top: 20px;
+
+  color: var(--muted);
 }
 
 .mail {
   display: inline-block;
 
+  margin-top: 24px;
+
   color: var(--gold-dark);
 
   font-weight: 850;
-
-  margin-top: 24px;
 }
 
 .contact-form {
@@ -1268,9 +1316,9 @@ details p {
 }
 
 label {
-  font-size: 0.7rem;
+  color: #716b63;
 
-  color: #77736b;
+  font-size: 0.7rem;
 }
 
 input,
@@ -1281,40 +1329,45 @@ textarea {
 
   margin-top: 7px;
 
-  background: #ffffff;
+  padding:
+    14px 15px;
 
-  border: 1px solid var(--line-dark);
+  border:
+    1px solid
+    rgba(17,16,14,0.12);
 
   border-radius: 13px;
 
-  padding: 14px 15px;
+  outline: none;
+
+  background:
+    rgba(255,255,255,0.72);
 
   color: var(--black);
-
-  outline: none;
 }
 
 input::placeholder,
 textarea::placeholder {
-  color: #aaa59b;
+  color: #8b857b;
 }
 
 input:focus,
 textarea:focus {
-  border-color: var(--gold);
+  border-color:
+    var(--gold);
 
-  box-shadow:
-    0 0 0 3px rgba(212, 154, 22, 0.08);
+  background:
+    #ffffff;
 }
 
 textarea {
-  resize: vertical;
-
   min-height: 130px;
+
+  resize: vertical;
 }
 
 .form-note {
-  color: #8a857c;
+  color: #817a70;
 
   font-size: 0.68rem;
 }
@@ -1333,28 +1386,33 @@ textarea {
    ========================================================= */
 
 .footer {
-  border-top: 1px solid var(--line);
+  padding:
+    28px 0;
 
-  padding: 28px 0;
+  border-top:
+    1px solid
+    rgba(255,255,255,0.08);
 
-  background: #ffffff;
+  background:
+    #11100e;
 }
 
 .footer-inner {
   display: flex;
 
-  justify-content: space-between;
   align-items: center;
+
+  justify-content: space-between;
 
   gap: 20px;
 
-  color: #77736b;
+  color: #817a70;
 
   font-size: 0.72rem;
 }
 
 .footer-brand {
-  color: var(--black);
+  color: var(--white);
 
   font-weight: 900;
 
@@ -1362,22 +1420,26 @@ textarea {
 }
 
 .footer-brand b {
-  color: var(--gold-dark);
+  color: var(--gold-light);
 }
 
 
 /* =========================================================
-   REVEAL ANIMATION
+   REVEAL
    ========================================================= */
 
+/*
+   IMPORTANT :
+   On désactive l'ancien système d'animation qui pouvait
+   modifier l'affichage après le chargement de la page.
+
+   Le contenu reste donc visible immédiatement.
+*/
+
 .reveal {
-  opacity: 0;
+  opacity: 1;
 
-  transform: translateY(18px);
-
-  transition:
-    opacity 0.6s ease,
-    transform 0.6s ease;
+  transform: none;
 }
 
 .reveal.visible {
@@ -1401,7 +1463,9 @@ textarea {
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+
     animation-iteration-count: 1 !important;
+
     transition-duration: 0.01ms !important;
   }
 
@@ -1414,10 +1478,14 @@ textarea {
 
 
 /* =========================================================
-   TABLET
+   TABLET — 900px
    ========================================================= */
 
 @media (max-width: 900px) {
+
+  /* -------------------------------------------------------
+     HEADER
+     ------------------------------------------------------- */
 
   .menu-toggle {
     display: block;
@@ -1426,10 +1494,10 @@ textarea {
   .nav-links {
     position: absolute;
 
+    top: 70px;
+
     left: 4%;
     right: 4%;
-
-    top: 70px;
 
     display: grid;
 
@@ -1437,35 +1505,43 @@ textarea {
 
     padding: 14px;
 
-    background: rgba(255, 255, 255, 0.98);
+    background:
+      rgba(248,246,241,0.98);
 
-    border: 1px solid var(--line);
+    border:
+      1px solid var(--line);
 
     border-radius: 18px;
 
-    box-shadow: var(--shadow-md);
-
-    transform: translateY(-15px);
+    box-shadow:
+      0 20px 50px
+      rgba(0,0,0,0.10);
 
     opacity: 0;
 
     pointer-events: none;
 
+    transform:
+      translateY(-10px);
+
     transition:
-      transform 0.2s ease,
-      opacity 0.2s ease;
+      opacity 0.2s ease,
+      transform 0.2s ease;
   }
 
   .nav-links.open {
-    transform: none;
-
     opacity: 1;
 
     pointer-events: auto;
+
+    transform:
+      translateY(0);
   }
 
   .nav-links a {
     padding: 12px;
+
+    color: var(--black);
   }
 
   .nav-cta {
@@ -1473,13 +1549,25 @@ textarea {
   }
 
 
-  /* =====================================================
-     IMPORTANT MOBILE HERO FIX
-     ===================================================== */
+  /* -------------------------------------------------------
+     HERO
+     ------------------------------------------------------- */
+
+  .hero {
+    min-height: auto;
+
+    padding:
+      120px
+      0
+      70px;
+  }
+
+  /*
+     UNE SEULE mise en page mobile.
+     Plus aucun conflit grid/flex.
+  */
 
   .hero-grid {
-    width: 100%;
-
     display: flex;
 
     flex-direction: column;
@@ -1500,22 +1588,23 @@ textarea {
 
     min-width: 0;
 
-    min-height: 430px;
+    min-height: auto;
   }
 
 
-  .hero h1 {
-    max-width: 100%;
-
-    overflow-wrap: anywhere;
-  }
-
+  /* -------------------------------------------------------
+     SERVICES
+     ------------------------------------------------------- */
 
   .service-grid {
     grid-template-columns:
       repeat(2, minmax(0, 1fr));
   }
 
+
+  /* -------------------------------------------------------
+     WORKFLOW
+     ------------------------------------------------------- */
 
   .workflow-grid {
     grid-template-columns:
@@ -1525,6 +1614,10 @@ textarea {
   }
 
 
+  /* -------------------------------------------------------
+     ABOUT
+     ------------------------------------------------------- */
+
   .split {
     grid-template-columns:
       minmax(0, 1fr);
@@ -1532,6 +1625,10 @@ textarea {
     gap: 45px;
   }
 
+
+  /* -------------------------------------------------------
+     CONTACT
+     ------------------------------------------------------- */
 
   .contact-box {
     grid-template-columns:
@@ -1541,12 +1638,20 @@ textarea {
   }
 
 
+  /* -------------------------------------------------------
+     SECTION HEADINGS
+     ------------------------------------------------------- */
+
   .section-heading {
     align-items: flex-start;
 
     flex-direction: column;
   }
 
+
+  /* -------------------------------------------------------
+     PLATFORMS
+     ------------------------------------------------------- */
 
   .platform-inner {
     align-items: flex-start;
@@ -1561,7 +1666,7 @@ textarea {
 
 
 /* =========================================================
-   MOBILE
+   MOBILE — 600px
    ========================================================= */
 
 @media (max-width: 600px) {
@@ -1571,15 +1676,17 @@ textarea {
   }
 
 
-  /* Header */
+  /* -------------------------------------------------------
+     HEADER
+     ------------------------------------------------------- */
 
   .nav {
     min-height: 70px;
   }
 
   .brand img {
-    width: 54px;
-    height: 54px;
+    width: 50px;
+    height: 50px;
   }
 
   .brand span {
@@ -1587,41 +1694,44 @@ textarea {
   }
 
 
-  /* Hero */
+  /* -------------------------------------------------------
+     HERO
+     ------------------------------------------------------- */
 
   .hero {
-    min-height: auto;
-
-    padding-top: 118px;
+    padding-top: 108px;
 
     padding-bottom: 65px;
   }
 
-  .hero-grid {
-    gap: 45px;
-  }
-
   .hero h1 {
+    width: 100%;
+
+    max-width: 100%;
+
     font-size:
-      clamp(3rem, 15vw, 4.45rem);
+      clamp(
+        3rem,
+        15vw,
+        4.5rem
+      );
 
     line-height: 0.91;
 
     letter-spacing: -0.06em;
 
-    max-width: 100%;
+    overflow-wrap: normal;
+
+    word-break: normal;
   }
 
   .hero-lead {
-    width: 100%;
-
     max-width: 100%;
 
-    font-size: 0.98rem;
+    font-size: 0.95rem;
 
     line-height: 1.7;
   }
-
 
   .hero-actions {
     width: 100%;
@@ -1636,23 +1746,14 @@ textarea {
   }
 
 
-  .micro-proof {
-    font-size: 0.68rem;
-
-    overflow: hidden;
-  }
-
-
-  /* Hero image */
-
-  .hero-art {
-    min-height: auto;
-
-    padding-top: 5px;
-  }
+  /* -------------------------------------------------------
+     HERO IMAGE
+     ------------------------------------------------------- */
 
   .art-frame {
-    width: min(390px, 100%);
+    width: 100%;
+
+    max-width: 390px;
 
     border-radius: 24px;
   }
@@ -1662,27 +1763,37 @@ textarea {
   }
 
 
-  /* Sections */
+  /* -------------------------------------------------------
+     SECTIONS
+     ------------------------------------------------------- */
 
   .section {
-    padding: 78px 0;
+    padding:
+      78px 0;
   }
-
 
   .section-heading h2 {
     font-size:
-      clamp(2.55rem, 13vw, 4rem);
+      clamp(
+        2.55rem,
+        13vw,
+        4rem
+      );
   }
 
 
-  /* Services */
+  /* -------------------------------------------------------
+     SERVICES
+     ------------------------------------------------------- */
 
   .service-grid {
     grid-template-columns: 1fr;
   }
 
 
-  /* Workflow */
+  /* -------------------------------------------------------
+     WORKFLOW
+     ------------------------------------------------------- */
 
   .workflow-grid {
     grid-template-columns: 1fr;
@@ -1691,7 +1802,9 @@ textarea {
   }
 
 
-  /* About */
+  /* -------------------------------------------------------
+     MANIFESTO
+     ------------------------------------------------------- */
 
   .manifesto-points {
     grid-template-columns: 1fr;
@@ -1700,18 +1813,23 @@ textarea {
   }
 
 
-  /* Metrics */
+  /* -------------------------------------------------------
+     METRICS
+     ------------------------------------------------------- */
 
   .metric-grid {
     grid-template-columns: 1fr;
   }
 
   .metric {
+    padding:
+      22px 0;
+
     border-right: 0;
 
-    border-bottom: 1px solid var(--line);
-
-    padding: 22px 0;
+    border-bottom:
+      1px solid
+      rgba(255,255,255,0.10);
   }
 
   .metric:last-child {
@@ -1719,10 +1837,13 @@ textarea {
   }
 
 
-  /* Contact */
+  /* -------------------------------------------------------
+     CONTACT
+     ------------------------------------------------------- */
 
   .contact-box {
-    padding: 32px 22px;
+    padding:
+      32px 22px;
 
     gap: 40px;
   }
@@ -1732,7 +1853,9 @@ textarea {
   }
 
 
-  /* Footer */
+  /* -------------------------------------------------------
+     FOOTER
+     ------------------------------------------------------- */
 
   .footer-inner {
     align-items: flex-start;
@@ -1743,7 +1866,7 @@ textarea {
 
 
 /* =========================================================
-   VERY SMALL PHONES
+   VERY SMALL PHONES — 380px
    ========================================================= */
 
 @media (max-width: 380px) {
@@ -1753,11 +1876,11 @@ textarea {
   }
 
   .hero-lead {
-    font-size: 0.92rem;
+    font-size: 0.91rem;
   }
 
   .brand img {
-    width: 50px;
-    height: 50px;
+    width: 46px;
+    height: 46px;
   }
 }
