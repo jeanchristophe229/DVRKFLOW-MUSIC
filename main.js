@@ -80,7 +80,7 @@ ${message}`
   status.textContent = "Ouverture de votre application email…";
 
   window.location.href =
-    `mailto:dvrkflowmusic@proton.me?subject=${subject}&body=${body}`;
+    `mailto:contact@dvrkflowmusic.spac?subject=${subject}&body=${body}`;
 });
 
 document.getElementById("year").textContent = new Date().getFullYear();
